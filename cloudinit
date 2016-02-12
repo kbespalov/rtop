@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dir=/opt/rtop/
+container_url=http://128.136.179.2:8080/v1/AUTH_8adf2519f0f0473db84ac559121ae485/rtop_deploy
+rtop_scripts=$container_url/rtop.tar
+rtop_init=$container_url/rtop.sh
+
+set_password(){
+	echo -e "ubuntu\nubuntu" | passwd ubuntu	
+}
+
+install_rtop(){
+	if [ ! -d $dir ]; then
+		mkdir $dir
+	fi
+	wget $rtop_scripts && tar xf rtop.tar -C $dir && rm rtop.tar
+	wget -O '/etc/init.d/rtop' $rtop_init
+	chmod +x '/etc/init.d/rtop'
+	update-rc.d rtop defaults	
+}
+
+echo 'Setting password..'
+set_password
+echo 'Install rtop..'
+install_rtop
+echo 'Done'
+
