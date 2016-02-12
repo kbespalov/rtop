@@ -1,5 +1,5 @@
 # rtop
-the python-based deamon for providing remote access to unix metrics by amqp
+the python-based daemon for providing remote access to unix metrics by amqp
 
 - config.py - describe auth credentials and remote host for mq server access
 - /metrics - contains self-made metrics collector which can produce next values:
